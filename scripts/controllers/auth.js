@@ -1,6 +1,6 @@
 'user strict';
 
-app.controller('AuthController' function($scope, $location, Auth) {
+app.controller('AuthController', function($scope, $location, Auth) {
 
 	$scope.register = function(user) {
 		Auth.register(user).then(function(){
@@ -10,6 +10,7 @@ app.controller('AuthController' function($scope, $location, Auth) {
 			console.log("Error...");
 		});
 	};
+
 	$scope.login = function(user) {
 		Auth.login(user)
 		.then(function() {
@@ -22,15 +23,15 @@ app.controller('AuthController' function($scope, $location, Auth) {
 
 	$scope.changePassword = function(user) {
 		Auth.changePassword(user)
-		.then(function() {
+			.then(function() {
 
-			$scope.user.email = '';
-			$scope.user.oldPass = '';
-			$scope.user.newPass = '';
+				$scope.user.email = '';
+				$scope.user.oldPass = '';
+				$scope.user.newPass = '';
 
-			console.log("Password changed successfully!");
-		}, function(err){
-			console.log('Error...');
+				console.log("Password changed successfully!");
+			}, function(err) {
+				console.log('Error...');
 		});
 	};
 });
