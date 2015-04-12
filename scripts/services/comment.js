@@ -1,13 +1,14 @@
 'use strict';
 
-app.factory('Comment', function(FURL, $firbase){
+app.factory('Comment', function(FURL, $firebase){
 
 	var ref = new Firebase(FURL);
 
 	var Comment = {
-		comment: function(taskID){
+		comments: function(taskID){
 			return $firebase(ref.child('comments').child(taskID)).$asArray();
 		},
+		
 		addComment: function(taskId, comment) {
 			var task_comments= this.comments(taskId);
 			comment.datetime = Firebase.ServerValue.TIMESTAMP;
