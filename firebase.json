@@ -1,0 +1,9 @@
+{
+  "firebase": "aj-tutorial",
+  "public": ".",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}
