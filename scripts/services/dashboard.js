@@ -4,12 +4,11 @@ app.factory('Dashboard', function(FURL, $firebase, $q){
 
 	var ref = new Firebase(FURL);
 
-	var DashBoard = {
+	var Dashboard = {
 
 		getTasksForUser: function(uid) {
 			var defer = $q.defer();
-
-			$firebase(ref.child('user_task').child(uid))
+			$firebase(ref.child('user_tasks').child(uid))
 			.$asArray()
 			.$loaded()
 			.then(function(tasks) {
