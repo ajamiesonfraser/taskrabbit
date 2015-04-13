@@ -1,12 +1,14 @@
 'use strict';
 
-app.controller('BrowseController', function($scope, $routeParams, toaster, Task, Auth, Comment) {
+app.controller('BrowseController', function($scope, $routeParams, toaster, Task, Auth, Comment, Offer) {
 
 	$scope.searchTask = '';
 	$scope.tasks = Task.all;
 	$scope.signedIn = Auth.signedIn;
 	$scope.listMode = true;
+	
 	$scope.user = Auth.user;
+
 
 	if($routeParams.taskId) {
 		var task = Task.getTask($routeParams.taskId).$asObject();
@@ -23,6 +25,8 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		}
 
 		$scope.comments = Comment.comments(task.$id);
+
+		$scope.offers = Offer.offers(task.$id);
 	};
 
 	$scope.cancelTask = function(taskId) {
@@ -40,6 +44,20 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 
 		Comment.addComment($scope.selectedTask.$id, comment).then(function(){
 			$scope.content = '';
+		});
+	};
+
+	$scope.makeOffer = function() {
+		var offer = {
+			total: $scope.total,
+			uid: $scope.user.uid,
+			name: $scope.user.profile.name,
+			gravatar: $scope.user.profile.gravatar
+		};
+
+		Offer.makeOffer($scope.selectedTask.$id, offer).then(function() {
+			toaster.pop('success', 'Your offer has been placed');
+			$scope.total = '';
 		});
 	};
 
