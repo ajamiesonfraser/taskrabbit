@@ -29,7 +29,8 @@ var app = angular
         controller: 'BrowseController'
       })
       .when('/dashboard', {
-        templateUrl: 'views/dashboard.html'
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardController'
       })
       .otherwise({
         redirectTo: '/'
