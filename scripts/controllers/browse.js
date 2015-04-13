@@ -21,8 +21,8 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 
 		if($scope.signedIn()) {
 
-			Offer.isOfferred(task.$id).then(function(data){
-				$scope.alreadyOfferred = data;
+			Offer.isOffered(task.$id).then(function(data){
+				$scope.alreadyOffered = data;
 			});
 
 			$scope.isTaskCreator = Task.isCreator;
@@ -34,6 +34,8 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		$scope.offers = Offer.offers(task.$id);
 
 		$scope.block = false;
+
+		$scope.isOfferMaker = Offer.isMaker;
 	};
 
 	$scope.cancelTask = function(taskId) {
@@ -66,7 +68,16 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 			toaster.pop('success', 'Your offer has been placed');
 			$scope.total = '';
 			$scope.block = true;
-			$scope.alreadyOfferred = true;
+			$scope.alreadyOffered = true;
+		});
+	};
+
+	$scope.cancelOffer = function(offerId) {
+		Offer.cancelOffer($scope.selectedTask.$id, offerId).then(function(){
+			toaster.pop('success', "Your offer has been cancelled.");
+
+			$scope.alreadyOffered = false;
+			$scope.block = false;
 		});
 	};
 

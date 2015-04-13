@@ -18,8 +18,8 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth) {
 				return task_offers.$add(offer);
 			}
 		},
-		
-		isOfferred: function(taskId) {
+
+		isOffered: function(taskId) {
 			if(user && user.provider) {
 				var d = $q.defer();
 
@@ -34,7 +34,19 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth) {
 					
 					return d.promise;
 			}
+		},
+
+		isMaker: function(offer) {
+			return (user && user.provider && user.uid === offer.uid);
+		},
+
+		getOffer: function(taskId, offerId) {
+			return $firebase(ref.child('offers').child(taskId).child(offerId));
+		},
+
+		cancelOffer: function(taskId, offerId) {
+			return this.getOffer(taskId, offerId).$remove();
 		}
-	};
+	}
 	return Offer;
 });
