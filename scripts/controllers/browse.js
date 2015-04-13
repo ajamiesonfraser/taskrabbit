@@ -21,8 +21,8 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 
 		if($scope.signedIn()) {
 
-			Offer.isOffered(task.$id).then(function(data){
-				$scope.alreadyOffered = data;
+			Offer.isOfferred(task.$id).then(function(data){
+				$scope.alreadyOfferred = data;
 			});
 
 			$scope.isTaskCreator = Task.isCreator;
@@ -66,7 +66,7 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 			toaster.pop('success', 'Your offer has been placed');
 			$scope.total = '';
 			$scope.block = true;
-			$scope.alreadyOffered = true;
+			$scope.alreadyOfferred = true;
 		});
 	};
 

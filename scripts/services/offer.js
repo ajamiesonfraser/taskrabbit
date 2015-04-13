@@ -17,8 +17,9 @@ app.factory('Offer', function(FURL, $firebase, $q, Auth) {
 			if(task_offers) {
 				return task_offers.$add(offer);
 			}
-		}
-		isOffered: function(taskId) {
+		},
+		
+		isOfferred: function(taskId) {
 			if(user && user.provider) {
 				var d = $q.defer();
 
