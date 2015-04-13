@@ -27,6 +27,8 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		$scope.comments = Comment.comments(task.$id);
 
 		$scope.offers = Offer.offers(task.$id);
+
+		$scope.block = false;
 	};
 
 	$scope.cancelTask = function(taskId) {
@@ -58,6 +60,7 @@ app.controller('BrowseController', function($scope, $routeParams, toaster, Task,
 		Offer.makeOffer($scope.selectedTask.$id, offer).then(function() {
 			toaster.pop('success', 'Your offer has been placed');
 			$scope.total = '';
+			$scope.block = false;
 		});
 	};
 
